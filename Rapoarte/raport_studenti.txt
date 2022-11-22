@@ -1,0 +1,8 @@
+DATELE STUDENTIILOR:
+
+nume			prenume			 Nr.Mat    An 
+
+adam               gheorghe                123457    1    
+Pop                george                  123458    1    
+popa               ion                     123456    3    
+
