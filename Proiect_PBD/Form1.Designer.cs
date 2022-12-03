@@ -36,8 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_golire_tabel = new System.Windows.Forms.Button();
             this.Adaugare_nota = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnPromovabilitate = new System.Windows.Forms.Button();
+            this.btn_Prezentari_m = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,32 +120,35 @@
             this.Adaugare_nota.Text = "Adaugare nota";
             this.Adaugare_nota.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // btnPromovabilitate
             // 
             this.btnPromovabilitate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnPromovabilitate.Location = new System.Drawing.Point(12, 468);
+            this.btnPromovabilitate.Location = new System.Drawing.Point(12, 476);
             this.btnPromovabilitate.Name = "btnPromovabilitate";
             this.btnPromovabilitate.Size = new System.Drawing.Size(154, 43);
             this.btnPromovabilitate.TabIndex = 10;
             this.btnPromovabilitate.Text = "Promovabiltatea";
             this.btnPromovabilitate.UseVisualStyleBackColor = true;
+            this.btnPromovabilitate.Click += new System.EventHandler(this.btnPromovabilitate_Click);
+            // 
+            // btn_Prezentari_m
+            // 
+            this.btn_Prezentari_m.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btn_Prezentari_m.Location = new System.Drawing.Point(12, 545);
+            this.btn_Prezentari_m.Name = "btn_Prezentari_m";
+            this.btn_Prezentari_m.Size = new System.Drawing.Size(154, 43);
+            this.btn_Prezentari_m.TabIndex = 11;
+            this.btn_Prezentari_m.Text = "Afisare prezentari";
+            this.btn_Prezentari_m.UseVisualStyleBackColor = true;
+            this.btn_Prezentari_m.Click += new System.EventHandler(this.btn_Prezentari_m_Click);
             // 
             // Meniu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1111, 754);
+            this.Controls.Add(this.btn_Prezentari_m);
             this.Controls.Add(this.btnPromovabilitate);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.Adaugare_nota);
             this.Controls.Add(this.btn_golire_tabel);
             this.Controls.Add(this.label1);
@@ -173,8 +176,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_golire_tabel;
         private System.Windows.Forms.Button Adaugare_nota;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnPromovabilitate;
+        private System.Windows.Forms.Button btn_Prezentari_m;
     }
 }
 

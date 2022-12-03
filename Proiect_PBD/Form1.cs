@@ -6,15 +6,34 @@ using System.Windows.Forms;
 
 namespace Proiect_PBD
 {
+   
     public partial class Meniu : Form
     {
-    
-
+        
         public Meniu()
         {
             InitializeComponent();
+            
         }
+        public void Calcul_Promovabilitate(string disciplina)
+        {
 
+            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
+            SqlConnection cnn = new SqlConnection(connect);
+            cnn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT nota from ProiectPBD where disciplina = @disciplina", cnn);
+            cmd.Parameters.AddWithValue("disciplina", disciplina);
+            SqlDataReader dr = cmd.ExecuteReader(); while (dr.Read())
+            {
+                int nota = int.Parse(dr["nota"].ToString());
+
+                MessageBox.Show("Promovabilitatea  este: " + (nota * 10) + " %");
+            }
+
+            cnn.Close();
+            dr.Close();
+            cmd.Dispose();
+        }
         private void btn_BD_Click(object sender, EventArgs e)
         {
             string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
@@ -210,6 +229,27 @@ namespace Proiect_PBD
                     }
                 }
             }
+        }
+
+        private void btnPromovabilitate_Click(object sender, EventArgs e)
+        {
+            Form f = new Form3();
+            f.ShowDialog();
+        }
+
+        private void btn_Prezentari_m_Click(object sender, EventArgs e)
+        {
+            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
+            SqlConnection cnn = new SqlConnection(connect);
+            cnn.Open();
+            string tabel_date = "select nume, prenume, nr_prezentare from ProiectPBD Where nr_prezentare = (Select MAX(nr_prezentare) FROM ProiectPBD)";
+            SqlDataAdapter da = new SqlDataAdapter(tabel_date, connect);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "ProiectPBD");
+            dataGridView1.DataSource = ds.Tables["ProiectPBD"].DefaultView;
+            cnn.Close();
+            
+            
         }
     }
 }
