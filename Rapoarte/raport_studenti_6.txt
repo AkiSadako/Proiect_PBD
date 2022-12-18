@@ -2,8 +2,5 @@ DATELE STUDENTIILOR:
 
 nume			prenume			 Nr.Mat    Disciplina      an_studiu           nota 
 
-adam               gheorghe                123457    Fizica                  1    9    
-Pop                george                  123458    Matematica              1    10    
-popa               ion                     123456    Chimie                  2    10    
-popa               ion                     123456    Engleza                 3    9    
+fsdf               cs                      dw        Matematica    1    6    
 

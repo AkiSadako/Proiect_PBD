@@ -25,7 +25,7 @@ namespace Proiect_PBD
         {
             int i = 0;
             float suma = 0;
-            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
+            string connect = @"Data Source=GABI\WINCC;Initial Catalog=Proiect_PBD;Integrated Security=True";
             SqlConnection cnn = new SqlConnection(connect);
             cnn.Open();
             SqlCommand cmd = new SqlCommand("SELECT nota from ProiectPBD where disciplina = @disciplina",cnn);

@@ -18,10 +18,10 @@ namespace Proiect_PBD
         public void Calcul_Promovabilitate(string disciplina)
         {
 
-            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
+            string connect = @"Data Source=GABI\WINCC;Initial Catalog=Proiect_PBD;Integrated Security=True";
             SqlConnection cnn = new SqlConnection(connect);
             cnn.Open();
-            SqlCommand cmd = new SqlCommand("SELECT nota from ProiectPBD where disciplina = @disciplina", cnn);
+            SqlCommand cmd = new SqlCommand("SELECT nota from studenti where disciplina = @disciplina", cnn);
             cmd.Parameters.AddWithValue("disciplina", disciplina);
             SqlDataReader dr = cmd.ExecuteReader(); while (dr.Read())
             {
@@ -36,85 +36,48 @@ namespace Proiect_PBD
         }
         private void btn_BD_Click(object sender, EventArgs e)
         {
-            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
-            SqlConnection cnn = new SqlConnection(connect);
-            cnn.Open();
-            string persoana = "Insert into ProiectPBD ([nume], [prenume], [Legitimatie], [medie_generala], [media_pe_anul_1],[media_pe_anul_2], [media_pe_anul_3], [disciplina], [an_studiu], [nr_prezentare], [data] ,[nota] ) " +
-                "values ('popa','ion','123456',4,5,0,0,'Matematica',1,1,'22/12/2003',4)," +
-                " ('adam','gheorghe','123457',7,5,0,0,'Fizica',1,1,'12/12/2003',9)," +
-                " ('popa','ion','123456',7,5,0,0,'Chimie',2,1,'01/03/2004',10), " +
-                " ('popa','ion','123456',7,5,0,0,'Engleza',3,2,'02/09/2005',9), " +
-                " ('Pop','george','123458',7,5,0,0,'Matematica',1,1,'12/12/2002',10) ";
-            SqlCommand sc = new SqlCommand(persoana,cnn);
-            sc.ExecuteNonQuery();
-            cnn.Close();
-            cnn.Open();
-            string tabel_date = "select * from ProiectPBD";
+            Form f = new Introducere();
+            f.ShowDialog();
+            refresh();
+
+        }
+        private void refresh()
+        {
+            string connect = @"Data Source=GABI\WINCC;Initial Catalog=Proiect_PBD;Integrated Security=True";
+             SqlConnection cnn = new SqlConnection(connect);
+            string tabel_date = "select * from note";
             SqlDataAdapter da = new SqlDataAdapter(tabel_date, connect);
             DataSet ds = new DataSet();
-            da.Fill(ds, "ProiectPBD");
-            dataGridView1.DataSource = ds.Tables["ProiectPBD"].DefaultView;
+            da.Fill(ds, "note");
+            dataGridView1.DataSource = ds.Tables["note"].DefaultView;
             cnn.Close();
         }
-
         private void Meniu_Load(object sender, EventArgs e)
         {
-            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
-            SqlConnection cnn = new SqlConnection(connect);
-            MessageBox.Show("S-a realizat conectarea cu baza de date!");
+            refresh();
+
         }
 
         private void btn_Afisare_nepromovati_Click(object sender, EventArgs e)
         {
-            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
+            string connect = @"Data Source=GABI\WINCC;Initial Catalog=Proiect_PBD;Integrated Security=True";
             SqlConnection cnn = new SqlConnection(connect);
             cnn.Open();
-            string tabel_date = "select * from ProiectPBD where nota <5";
+            string tabel_date = "select * from  note where nota <5";
             SqlDataAdapter da = new SqlDataAdapter(tabel_date, connect);
             DataSet ds = new DataSet();
-            da.Fill(ds, "ProiectPBD");
-            dataGridView1.DataSource = ds.Tables["ProiectPBD"].DefaultView;
+            da.Fill(ds, "note");
+            dataGridView1.DataSource = ds.Tables["note"].DefaultView;
             cnn.Close();
         }
 
         private void btn_Raport_Click(object sender, EventArgs e)
         {
-            /*//conectarea cu baza de date
-          string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
-          SqlConnection cnn = new SqlConnection(connect);
-          //comenzile
-          SqlCommand cmd = new SqlCommand();
-          cmd.Connection = cnn;
-          cnn.Open();
-          //Scriere in fisier
-          string path = @"D:\Facultate\Proiect_PBD\Rapoarte\raport_studenti.txt";
-          StreamWriter writer = new StreamWriter(path);
-          SqlDataReader reader = cmd.ExecuteReader();
-          writer.WriteLine("Datele: ");
-          while (reader.Read())
-          {
-              writer.Write(reader["nume"].ToString());
-              writer.Write(", " + reader["prenume"].ToString());
-              writer.Write(", " + reader["Legitimatie"].ToString());
-              writer.Write(", " + reader["medie_generala"].ToString());
-              writer.Write(", " + reader["media_pe_anul_1"].ToString());
-              writer.Write(", " + reader["media_pe_anul_2"].ToString());
-              writer.Write(", " + reader["media_pe_anul_3"].ToString());
-              writer.Write(", " + reader["disciplina"].ToString());
-              writer.Write(", " + reader["an_studiu"].ToString());
-              writer.Write(", " + reader["nr_prezentare"].ToString());
-              writer.Write(", " + reader["data"].ToString());
-              writer.WriteLine(", " + reader["nota"].ToString());
-          }
-          writer.WriteLine(DateTime.Now);
-          writer.WriteLine("---------------------------------");
-          writer.Close();
-          reader.Close();
-          cnn.Close();*/
-            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
+           
+            string connect = @"Data Source=GABI\WINCC;Initial Catalog=Proiect_PBD;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(connect))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT nume ,prenume , Legitimatie,MAX(an_studiu) FROM ProiectPBD Group BY nume,prenume,Legitimatie ORDER BY nume"))
+                using (SqlCommand cmd = new SqlCommand("SELECT nume ,prenume , Legitimatie,MAX(an_studiu) FROM note Group BY nume,prenume,Legitimatie ORDER BY nume"))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -149,11 +112,11 @@ namespace Proiect_PBD
                             }
 
                             //Download the Text file.
-                            string path = @"D:\Facultate\Proiect_PBD\Rapoarte\raport_studenti.txt";
+                            string path = @"C:\Users\ursul\OneDrive - Universitatea Politehnica Timisoara\Desktop\Proiect_PBD\Rapoarte\raport_studenti.txt";
                             using (StreamWriter writer= new StreamWriter(path))
                             {
                                 writer.WriteLine("DATELE STUDENTIILOR:\n");
-                                writer.WriteLine("nume\t\t\tprenume\t\t\t Nr.Mat    An ");
+                                writer.WriteLine("nume\t\t\tprenume\t Nr.Mat    An ");
                                 writer.WriteLine(txt);
                             }
                             
@@ -165,24 +128,25 @@ namespace Proiect_PBD
 
         private void btn_golire_tabel_Click(object sender, EventArgs e)
         {
-            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
+            string connect = @"Data Source=GABI\WINCC;Initial Catalog=Proiect_PBD;Integrated Security=True";
             SqlConnection cnn = new SqlConnection(connect);
             cnn.Open();
-            string tabel_date = "DELETE FROM ProiectPBD";
+            string tabel_date = "DELETE FROM note";
             SqlDataAdapter da = new SqlDataAdapter(tabel_date, connect);
             DataSet ds = new DataSet();
-            da.Fill(ds, "ProiectPBD");
+            da.Fill(ds, "note");
             //dataGridView1.DataSource = ds.Tables["ProiectPBD"].DefaultView;
             cnn.Close();
-            MessageBox.Show("Sa sters baza de date!");
+            MessageBox.Show("S-a sters baza de date!");
+            refresh();
         }
 
         private void btn_Raport_6_Click(object sender, EventArgs e)
         {
-            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
+            string connect = @"Data Source=GABI\WINCC;Initial Catalog=Proiect_PBD;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(connect))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT nume ,prenume, Legitimatie,disciplina,an_studiu,nota FROM ProiectPBD WHERE nota>5 Group BY nume ,prenume , Legitimatie,disciplina,an_studiu,nota ORDER BY nume,prenume,an_studiu,disciplina"))
+                using (SqlCommand cmd = new SqlCommand("SELECT nume ,prenume, Legitimatie,disciplina,an_studiu,nota FROM note WHERE nota>5 Group BY nume ,prenume , Legitimatie,disciplina,an_studiu,nota ORDER BY nume,prenume,an_studiu,disciplina"))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -217,7 +181,7 @@ namespace Proiect_PBD
                             }
 
                             //Download the Text file.
-                            string path = @"D:\Facultate\Proiect_PBD\Rapoarte\raport_studenti_6.txt";
+                            string path = @"C:\Users\ursul\OneDrive - Universitatea Politehnica Timisoara\Desktop\Proiect_PBD\Rapoarte\raport_studenti_6.txt";
                             using (StreamWriter writer = new StreamWriter(path))
                             {
                                 writer.WriteLine("DATELE STUDENTIILOR:\n");
@@ -239,17 +203,24 @@ namespace Proiect_PBD
 
         private void btn_Prezentari_m_Click(object sender, EventArgs e)
         {
-            string connect = @"Data Source=DENIS-PC\SQLEXPRESS;Initial Catalog=Proiect_PBD;Integrated Security=True";
+            string connect = @"Data Source=GABI\WINCC;Initial Catalog=Proiect_PBD;Integrated Security=True";
             SqlConnection cnn = new SqlConnection(connect);
             cnn.Open();
-            string tabel_date = "select nume, prenume, nr_prezentare from ProiectPBD Where nr_prezentare = (Select MAX(nr_prezentare) FROM ProiectPBD)";
+            string tabel_date = "select nume, prenume, nr_prezentare from note Where nr_prezentare = (Select MAX(nr_prezentare) FROM ProiectPBD)";
             SqlDataAdapter da = new SqlDataAdapter(tabel_date, connect);
             DataSet ds = new DataSet();
-            da.Fill(ds, "ProiectPBD");
-            dataGridView1.DataSource = ds.Tables["ProiectPBD"].DefaultView;
+            da.Fill(ds, "note");
+            dataGridView1.DataSource = ds.Tables["note"].DefaultView;
             cnn.Close();
             
             
+        }
+
+        private void Adaugare_nota_Click(object sender, EventArgs e)
+        {
+            Form f = new Form2();
+            f.ShowDialog();
+            refresh();
         }
     }
 }

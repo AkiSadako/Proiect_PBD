@@ -38,6 +38,8 @@
             this.btnAdaugare_nota = new System.Windows.Forms.Button();
             this.comboBoxdisciplina = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -46,7 +48,7 @@
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Location = new System.Drawing.Point(167, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 25);
+            this.label1.Size = new System.Drawing.Size(164, 26);
             this.label1.TabIndex = 7;
             this.label1.Text = "Adaugare nota";
             // 
@@ -63,10 +65,6 @@
             // comboBoxlegitimatie
             // 
             this.comboBoxlegitimatie.FormattingEnabled = true;
-            this.comboBoxlegitimatie.Items.AddRange(new object[] {
-            "123456",
-            "123457",
-            "123458"});
             this.comboBoxlegitimatie.Location = new System.Drawing.Point(276, 90);
             this.comboBoxlegitimatie.Name = "comboBoxlegitimatie";
             this.comboBoxlegitimatie.Size = new System.Drawing.Size(234, 24);
@@ -113,7 +111,7 @@
             // 
             // btnAdaugare_nota
             // 
-            this.btnAdaugare_nota.Location = new System.Drawing.Point(189, 347);
+            this.btnAdaugare_nota.Location = new System.Drawing.Point(191, 351);
             this.btnAdaugare_nota.Name = "btnAdaugare_nota";
             this.btnAdaugare_nota.Size = new System.Drawing.Size(130, 37);
             this.btnAdaugare_nota.TabIndex = 14;
@@ -144,11 +142,29 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Selectati disciplina\r\n";
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(181, 299);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(208, 22);
+            this.textBox2.TabIndex = 17;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 304);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(97, 17);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Nr Prezentare";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 423);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.comboBoxdisciplina);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnAdaugare_nota);
@@ -161,6 +177,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form2";
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,5 +195,7 @@
         private System.Windows.Forms.Button btnAdaugare_nota;
         private System.Windows.Forms.ComboBox comboBoxdisciplina;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label6;
     }
 }
